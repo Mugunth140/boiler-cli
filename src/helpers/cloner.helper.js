@@ -13,6 +13,7 @@ export function clone(repo) {
         const setupSpinner = createSpinner('Setting up your project...').start();
         setupSpinner.success({ text: 'Setup completed successfully' });
         resolve();
+        cloneSpinner.stop();
       }
     });
   });

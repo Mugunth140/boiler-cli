@@ -26,8 +26,12 @@ export const privateList = async () => {
                     headers: {
                         Authorization: `Bearer ${token}`
                     },
-                    timeout: 10000 // 10 second timeout
+                    timeout: 10000
                 });
+                if(data.length === 0) {
+                    console.log(chalk.yellow('No templates found !'));
+                    return;
+                }
 
                 spinner.success({ text: 'Logged in successfully!' });
                 
@@ -49,6 +53,7 @@ export const privateList = async () => {
                 console.error(chalk.red(`Error: ${error.message || 'Unknown error occurred'}`));
                 if (error.response) {
                     console.error(chalk.red(`Server responded with: ${error.response.status}`));
+                    return;
                 }
             }
         } else {

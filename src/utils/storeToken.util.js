@@ -1,7 +1,7 @@
 import { LocalStorage } from "node-localstorage";
 
+const localStorage = new LocalStorage('./store');
 export const storeToken = async (token, id) => {
-    const localStorage = new LocalStorage('./store');
     if (!token || !id) {
         throw new Error('All params are required');
     }

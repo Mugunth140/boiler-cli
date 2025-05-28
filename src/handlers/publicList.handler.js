@@ -11,6 +11,10 @@ export function publicList() {
     const spinner = createSpinner('Fetching public templates...').start();
     axios.get(`${publicUrl}`)
         .then(async response => {
+            if(response.data.length === 0) {
+                spinner.error({ text: 'No templates found!' });
+                return;
+            }
             spinner.success({ text: 'Templates fetched successfully!' });
             const seletedTemp = await displayTemplates(response.data);
             const success = await clone(seletedTemp);
