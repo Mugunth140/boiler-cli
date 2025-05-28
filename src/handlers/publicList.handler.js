@@ -3,10 +3,11 @@ import axios from 'axios';
 import { displayTemplates } from '../helpers/displayTemplates.helper.js';
 import { clone } from '../helpers/cloner.helper.js';
 import { ResLoader } from '../utils/loader.util.js';
+import { BASE_SERVER_URL } from '../utils/constants.js';
 
 
 export function publicList() {
-    const publicUrl = `${process.env.BASE_SERVER_URL}/public`;
+    const publicUrl = `${BASE_SERVER_URL}/public`;
     const spinner = createSpinner('Fetching public templates...').start();
     axios.get(`${publicUrl}`)
         .then(async response => {

@@ -9,6 +9,7 @@ import { storeToken, getToken } from '../utils/storeToken.util.js';
 import axios from 'axios';
 import { displayTemplates } from '../helpers/displayTemplates.helper.js';
 import { clone } from '../helpers/cloner.helper.js';
+import { BASE_SERVER_URL } from '../utils/constants.js';
 
 export const privateList = async () => {
     try {
@@ -19,7 +20,7 @@ export const privateList = async () => {
             
             try {
                 const {token, id} = await getToken();
-                const privateUrl = `${process.env.BASE_SERVER_URL}/private`;
+                const privateUrl = `${BASE_SERVER_URL}/private`;
                 
                 const { data } = await axios.get(`${privateUrl}/${id}`, {
                     headers: {

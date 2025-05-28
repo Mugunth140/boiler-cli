@@ -2,14 +2,15 @@ import axios from 'axios';
 import chalk from 'chalk';
 import { LocalStorage } from 'node-localstorage';
 import { ResLoader } from "./loader.util.js";
+import { BASE_SERVER_URL } from './constants.js';
 
-const localStorage = new LocalStorage('./store')
 export const loginUser = async ({ username, password }) => {
+   const localStorage = new LocalStorage('./store')
    try {
       if (!username || !password) {
          throw new Error('Username and password are required');
       }
-      const token = await axios.post(`${process.env.BASE_SERVER_URL}/auth/login`, {
+      const token = await axios.post(`${BASE_SERVER_URL}/auth/login`, {
          username,
          password
       });

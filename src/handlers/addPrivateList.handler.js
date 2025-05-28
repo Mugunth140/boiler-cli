@@ -2,6 +2,7 @@ import chalk from "chalk";
 import prompts from "prompts";
 import axios from "axios";
 import { LocalStorage } from "node-localstorage";
+import { BASE_SERVER_URL } from "../utils/constants.js";
 const localStorage = new LocalStorage('./store');
 
 export async function addPrivateList() {
@@ -47,13 +48,13 @@ export async function addPrivateList() {
             return;
         }
 
-        if (!process.env.BASE_SERVER_URL) {
+        if (!BASE_SERVER_URL) {
             console.log(chalk.red("Server URL not configured."));
             return;
         }
 
         const { data } = await axios.post(
-            `${process.env.BASE_SERVER_URL}/private/`, 
+            `${BASE_SERVER_URL}/private/`, 
             { 
                 user, 
                 name: name.trim(), 
