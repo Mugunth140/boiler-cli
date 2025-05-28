@@ -15,9 +15,7 @@
     "boiler": "./index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js",
-     "prepublishOnly": "npm test"
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "axios": "^1.9.0",
