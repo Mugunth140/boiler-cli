@@ -1,0 +1,40 @@
+{
+  "name": "@mugunth140/boiler",
+  "version": "0.0.5",
+  "description": "a friendly cli tool for generating coustom or predefined boilerplate code",
+  "keywords": [
+    "cli",
+    "boiler",
+    "boilerplate"
+  ],
+  "license": "MIT",
+  "author": "mugunth140",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "boiler": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "cli": "nodemon cli.js"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.11.0",
+    "axios": "^1.9.0",
+    "chalk": "^5.4.1",
+    "chalk-animation": "^2.0.3",
+    "commander": "^14.0.0",
+    "dotenv": "^16.5.0",
+    "figlet": "^1.8.1",
+    "inquirer": "^12.6.2",
+    "mongoose": "^8.15.0",
+    "nanospinner": "^1.2.2",
+    "node-localstorage": "^3.0.5",
+    "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
