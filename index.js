@@ -1,41 +1,92 @@
 #!/usr/bin/env node
-import 'dotenv/config';
-import { Command } from "commander";
-import { publicList } from "./src/handlers/publicList.handler.js";
-import { InitLoader } from './src/utils/loader.util.js';
-import { privateList } from './src/handlers/privateList.handler.js';
-import { addPrivateList } from './src/handlers/addPrivateList.handler.js';
 
-const program = new Command();
-const sleep = (ms = 2000) => new Promise(res => setTimeout(res, ms));
-console.clear();
-InitLoader('Loading Boiler....');
-await sleep();
-console.clear();
+import chalk from "chalk";
+import path from "path";
+import prompts from "prompts";
+import { installFeatures } from "./src/features.js";
+import { checkGit, cloneRepo, initGit, installDependencies } from "./src/git.js";
+import { P } from "./src/theme.js";
+import { displayThankYou, displayTitle, getChoices, getFeatureChoices, sectionHeader } from "./src/ui.js";
+import { sleep } from "./src/utils.js";
 
-program
-   .name("boiler")
-   .version("1.2.0")
-   .description("A CLI tool for kickstarting your dream project hassel free.");
+const onCancel = () => {
+  console.log(`\n${P}${chalk.hex("#475569")("Cancelled. Bye! 👋")}\n`);
+  process.exit(0);
+};
 
-program
-  .command('public')
-  .description('List all public templates')
-  .action(publicList);
+async function main() {
+  await displayTitle();
 
-const privateCmd = program
-  .command('private')
-  .description('Manage your private templates (login required)');
+  const hasGit = await checkGit();
+  if (!hasGit) {
+    console.log(`${P}${chalk.hex("#ef4444")("✗")} Git required.`);
+    process.exit(1);
+  }
 
-privateCmd
-  .command('list')
-  .description('List all private templates')
-  .action(privateList);
+  // Template
+  await sectionHeader("Select template");
+  console.log();
 
-privateCmd
-  .command('add')
-  .description('Add a private templates')
-  .action(addPrivateList);
+  const { template } = await prompts({
+    type: "select",
+    name: "template",
+    message: " ",
+    choices: getChoices(),
+    hint: "↑↓ enter",
+  }, { onCancel });
 
-program.parse();
+  if (!template) process.exit(0);
 
+  // Name
+  console.log();
+  await sectionHeader("Project name");
+  console.log();
+
+  const { projectName } = await prompts({
+    type: "text",
+    name: "projectName",
+    message: " ",
+    initial: "my-project",
+    hint: "use '.' for current folder",
+    validate: (v) => !v ? "Required" : !/^[a-zA-Z0-9-_.]+$/.test(v) ? "Invalid chars" : true,
+  }, { onCancel });
+
+  if (!projectName) process.exit(0);
+
+  const projectPath = path.join(process.cwd(), projectName);
+
+  // Features
+  console.log();
+  await sectionHeader("Add features", "📦");
+  console.log();
+
+  const { features } = await prompts({
+    type: "multiselect",
+    name: "features",
+    message: " ",
+    choices: getFeatureChoices(),
+    hint: "space enter",
+  }, { onCancel });
+
+  // Setup
+  console.log();
+  process.stdout.write(`${P}${chalk.hex("#3b82f6")("🚀")} `);
+  for (const char of "Setting up...") {
+    process.stdout.write(chalk.white(char));
+    await sleep(25);
+  }
+  console.log("\n");
+
+  const cloned = await cloneRepo(template.url, projectName);
+  if (!cloned) process.exit(1);
+
+  await initGit(projectPath);
+  await installDependencies(projectPath);
+  await installFeatures(features || [], projectPath);
+  await displayThankYou(projectName);
+}
+
+main().catch((e) => {
+  console.error(`${P}${chalk.hex("#ef4444")("✗")} ${e.message}`);
+  process.exit(1);
+});

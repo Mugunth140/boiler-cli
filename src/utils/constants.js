@@ -1,1 +1,0 @@
-export const BASE_SERVER_URL="https://boiler-backend.onrender.com/api/v1"

@@ -1,91 +1,127 @@
-# boiler 🔥
+# 🚀 Boiler CLI
 
-[![npm version](https://img.shields.io/npm/v/@mugunth140/boiler)](https://www.npmjs.com/package/@mugunth140/boiler)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
+> Modern project scaffolding made simple
 
-> A lightning-fast CLI tool for kickstarting projects with custom boilerplate templates
+A beautiful, interactive CLI tool for scaffolding projects with pre-configured templates, development tools, and best practices.
 
-![](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDNjNnpmcnN0Mzk4djVzbjlzbjQ2NTUweTIxZG9zMmVkMzY3aWhhNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o72FfM5HJydzafgUE/giphy.gif)
+![npm version](https://img.shields.io/npm/v/@mugunth140/boiler)
+![license](https://img.shields.io/npm/l/@mugunth140/boiler)
 
-## Features
+## ✨ Features
 
-- 🚀 Instant public template access
-- 🔒 Private template management
-- ✨ Interactive prompts for seamless workflow
-- 🎨 Animated terminal feedback
-- 🔧 Extensible template system
+- 🎨 **Beautiful UI** - Modern, colorful interface with animations
+- 📦 **Multiple Templates** - Choose from various project boilerplates
+- ⚡ **Quick Setup** - Get started in seconds with automated setup
+- 🛠️ **Dev Tools** - Optional ESLint, Prettier, Husky integration
+- 🔧 **Flexible** - Customize your project setup as needed
 
-## Installation
+## 📦 Installation
 
 ```bash
+# Using npm
 npm install -g @mugunth140/boiler
+
+# Using npx (no installation required)
+npx @mugunth140/boiler
 ```
 
-## Usage
+## 🚀 Usage
 
-### List public templates
+Simply run the command and follow the interactive prompts:
+
 ```bash
-boiler public
+boiler
 ```
 
-### Manage private templates
-```bash
-# List private templates
-boiler private list
+### What you'll be asked:
 
-# Add new private template
-boiler private add
-```
+1. **Select a template** - Choose from available boilerplates
+2. **Name your project** - Enter your project name
+3. **Select features** - Choose additional tools to install
+4. **Confirm options** - Git init and npm install
 
-### Show help
-```bash
-boiler --help
-```
+## 📋 Available Templates
 
-## Command Reference
-| Command | Description |
+| Template | Description |
+|----------|-------------|
+| React + Vite | Modern React setup with Vite |
+| Next.js | Full-stack React framework |
+| Express API | Node.js REST API starter |
+| Vue + Vite | Vue 3 with Vite |
+| And more... | Check the CLI for all options |
+
+## 🛠️ Optional Features
+
+| Feature | Description |
 |---------|-------------|
-| `boiler public` | Show all available public templates |
-| `boiler private list` | List your private templates |
-| `boiler private add` | Add a new private template |
-| `boiler --version` | Show installed version |
-| `boiler --help` | Display command help |
+| `.env` | Environment variables template |
+| `.gitignore` | Comprehensive ignore patterns |
+| **ESLint** | JavaScript/TypeScript linting (recommended) |
+| **Prettier** | Code formatting (recommended) |
+| **Husky** | Git hooks with lint-staged |
 
-## Development Setup
+## 📁 Project Structure
 
-1. Clone repository:
-```bash
-git clone https://github.com/mugunth140/boiler-cli.git
-cd boiler-cli
+```
+boiler-cli/
+├── index.js          # Main CLI entry point
+├── data.js           # Template definitions
+├── package.json
+├── README.md
+└── src/
+    ├── theme.js      # Colors, icons, styling
+    ├── utils.js      # Utility functions
+    ├── templates.js  # File templates (env, eslint, etc.)
+    ├── git.js        # Git operations
+    ├── features.js   # Feature installation logic
+    └── ui.js         # UI components
 ```
 
-2. Install dependencies:
-```bash
-npm install
+## 🔧 Configuration
+
+### Adding Custom Templates
+
+Edit `data.js` to add your own templates:
+
+```javascript
+export default [
+  {
+    name: "My Template",
+    description: "Description of my template",
+    repo: "https://github.com/user/repo"
+  },
+  // ... more templates
+];
 ```
 
-3. Link package globally:
-```bash
-npm link
-```
+## 🤝 Contributing
 
-4. Start in development mode:
-```bash
-npm run dev
-```
+Contributions are welcome! Here's how you can help:
 
-## Dependencies
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-- [Commander.js](https://github.com/tj/commander.js) - Command framework
-- [Chalk](https://github.com/chalk/chalk) - Terminal styling
-- [Prompts](https://github.com/terkelg/prompts) - Interactive prompts
-- [Nanospinner](https://github.com/usmanyunusov/nanospinner) - CLI spinners
+### Adding New Templates
 
-## Contributing
+Want to add your own boilerplate templates? We'd love to include them!
 
-Pull requests are welcome! For major changes, please open an issue first to discuss proposed changes.
+1. Add your template to `data.js`
+2. Make sure your template repo is public
+3. Submit a PR with a description of your template
 
-## License
+## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT © [Mugunth](https://github.com/mugunth140)
+
+---
+
+<p align="center">
+  <sub>Made with ❤️ by <a href="https://github.com/mugunth140">Mugunth</a></sub>
+</p>
+
+<p align="center">
+  <sub>For adding your own templates, feel free to contribute to the repo and raise a PR!</sub>
+</p>
